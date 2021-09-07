@@ -39,12 +39,17 @@ export default function EventAdd() {
 
     if (Content === '' || Due === '') {
       alert("Please enter the Content and Due Date at least!");
+    } else {
+      let tokenId: string = tokenGenerate().toString();
+      let data = {Token: tokenId, Finished: 'false', Priority: Priority, Notification: Notification, Content: Content, Due: Due};
+      localStorage.setItem(tokenId, JSON.stringify(data));
     }
-
-    var data = {Priority: Priority, Notification: Notification, Content: Content, Due: Due};
-    var path = {  pathname:'/',  query:data}
     
-    history.push(path);
+    history.push('/');
+  }
+
+  function tokenGenerate(): number {
+    return Math.floor(Math.random() * 10000) + 1;
   }
 
   return (
