@@ -1,7 +1,7 @@
 import { Input } from 'antd';
 import { DatePicker, Space, Checkbox, Button } from 'antd';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function EventAdd() {
 
@@ -9,6 +9,7 @@ export default function EventAdd() {
   const [Notification, setNotification] = useState(false);
   const [Content, setContent] = useState('');
   const [Due, setDue] = useState('')
+  let history = useHistory();
 
   function handlePriorityChange() {
 
@@ -39,8 +40,11 @@ export default function EventAdd() {
     if (Content === '' || Due === '') {
       alert("Please enter the Content and Due Date at least!");
     }
-    console.log(Priority, Notification, Content, Due)
 
+    var data = {Priority: Priority, Notification: Notification, Content: Content, Due: Due};
+    var path = {  pathname:'/',  query:data}
+    
+    history.push(path);
   }
 
   return (
