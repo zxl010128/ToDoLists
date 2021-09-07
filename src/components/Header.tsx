@@ -1,22 +1,27 @@
 import { Layout, Menu, Dropdown } from 'antd';
-
 import { DownCircleOutlined, AppstoreAddOutlined, SaveOutlined, RollbackOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const menu = (
-  <Menu>
-    <Menu.Item icon={<SaveOutlined />}>
-      Save
-    </Menu.Item>
-    <Menu.Item icon={<AppstoreAddOutlined/>}>
-      Add New Event
-    </Menu.Item>
-    <Menu.Item icon={<RollbackOutlined/>}>
-      Back To MainPage
-    </Menu.Item>
-  </Menu>
-);
+const menu = () => {
 
+  return (
+    <Menu>
+      <Menu.Item icon={<SaveOutlined />}>
+        Save
+      </Menu.Item>
+      <Menu.Item icon={<AppstoreAddOutlined/>}>
+        <Link to="/EventAdd">Add New Event</Link>
+      </Menu.Item>
+      <Menu.Item icon={<RollbackOutlined/>}>
+        <Link to="/">Back To MainPage</Link>
+      </Menu.Item>
+    </Menu>
+  );
+
+}
+
+  
 function currentTime(): string {
   let currTime = new Date();
   let currYear: string = currTime.getFullYear().toString();

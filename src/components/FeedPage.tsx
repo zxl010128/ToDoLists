@@ -5,12 +5,12 @@ export default function FeedPage() {
 
   const [events, setEvents] = useState([]);
 
-  if (events.length === 1) {
-  return (
-    <div className="Feed">
-      2333
-    </div>
-  )
+  if (events.length !== 0) {
+    return (
+      <div className="Feed">
+        2333
+      </div>
+    )
   }
 
   return (
@@ -18,4 +18,5 @@ export default function FeedPage() {
     className='Empty'
     description='Nothing To Do'/>
   )
-  }
+}
+

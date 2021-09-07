@@ -5,8 +5,8 @@ export default function MainPage() {
 
   return(
     <div className="App">
-    <Header></Header>
-    <FeedPage></FeedPage>
-  </div>
+      <Header></Header>
+      <FeedPage></FeedPage>
+    </div>
   )
 }
