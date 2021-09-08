@@ -3,6 +3,7 @@ import { DownCircleOutlined, AppstoreAddOutlined, SaveOutlined, RollbackOutlined
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// Header左侧的下拉栏
 const menu = () => {
 
   return (
@@ -21,7 +22,7 @@ const menu = () => {
 
 }
 
-  
+// Header右侧的当前时间记录
 function currentTime(): string {
   let currTime = new Date();
   let currYear: string = currTime.getFullYear().toString();
@@ -43,6 +44,7 @@ function currentTime(): string {
   return `${currYear}.${currMonth}.${currDate} ${currDayName} ${currHour}:${currMin}`
 }
 
+// 将getDay函数返回的数字与星期进行转换
 function numberToDayName(num: number):string {
   switch(num) {
     case 0:
@@ -63,6 +65,7 @@ function numberToDayName(num: number):string {
   return 'Unknown'
 }
 
+// 格式修改：将所有一位数字进行补0
 function addZeroForTime(num: string): string {
   if (parseInt(num) < 10) {
     return '0'+num
@@ -70,9 +73,10 @@ function addZeroForTime(num: string): string {
 
   return num
 }
+
 export default function Headers() {
 
-  const [time, setTime] = useState('')
+  const [time, setTime] = useState('') // 记录当前时间
 
   useEffect(() => {
     setInterval(() => {

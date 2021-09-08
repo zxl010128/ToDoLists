@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import MainPage from './pages/MainPage';
 import EventAddPage from './pages/EventAddPage';
 import './App.css';
@@ -8,7 +8,7 @@ import {
   Route,
 } from 'react-router-dom';
 
-const App: FC = () => (
+const App = () => (
   <div className="App">
     <Router>
       <Switch>
