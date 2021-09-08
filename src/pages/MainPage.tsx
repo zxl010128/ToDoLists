@@ -1,10 +1,12 @@
-import { Empty } from 'antd';
+import { Button, Empty } from 'antd';
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
+import { Card } from 'antd';
+import { Radio } from 'antd';
 
-export default function MainPage(props: any) {
+export default function MainPage() {
 
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<any[]>([]);
 
   useEffect(() => {
     
@@ -16,7 +18,7 @@ export default function MainPage(props: any) {
         
       let getKey = localStorage.key(i) || "";
 
-      let getVal = localStorage.getItem(getKey);
+      let getVal = JSON.parse(localStorage.getItem(getKey) || '');
 
       arr[i] = {
         'key': getKey,
@@ -25,7 +27,7 @@ export default function MainPage(props: any) {
 
     }
     
-    let todoList = []
+    let todoList: any = []
 
     for(let i = 0; i < arr.length; i++) {
         
@@ -35,16 +37,66 @@ export default function MainPage(props: any) {
 
     }
     console.log(todoList)
+
+    setEvents(todoList);
     
   }, [])
+
+  function Cards() {
+    
+    const FormList = events.map((event) => {
+      
+      function handleFinished() {
+
+        if (event.Finished === "true") {
+          event.Finished = "false";
+          console.log('hahaha')
+          localStorage.setItem(event.Token, JSON.stringify(event))
+        } else {
+          event.Finished = "true";
+          console.log('haha')
+          localStorage.setItem(event.Token, JSON.stringify(event))
+        }
+
+      };
+  
+      console.log(event.Token)
+
+      let style = {}
+      
+      if (event.Finished === "true") {
+        style = { width: 300, height: 200, border: '1px solid blue'};
+      } else if (event.Priority === true) {
+        style = { width: 300, height: 200, border: '1px solid red'};
+      } else {
+        style = { width: 300, height: 200 };
+      }
+
+      return (
+        <Card 
+        className="feedCard"
+        id={event.Token} 
+        title={event.Due} 
+        extra={<Button type="text" danger>Delete</Button>} 
+        style={style}>
+          <p>{event.Content}</p>
+          <Radio onChange={handleFinished} defaultChecked={event.Finished === "true" ? true : false}>Finished</Radio>
+        </Card>
+      )
+    })
+
+    return (
+      <div className="Feed">
+        {FormList}
+      </div>
+    )
+  }
 
   if (events.length !== 0) {
     return (
       <div className="App">
         <Header></Header>
-        <div className="Feed">
-          2333
-        </div>
+        <Cards/>
       </div>
 
     )
