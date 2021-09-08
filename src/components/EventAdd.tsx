@@ -38,13 +38,15 @@ export default function EventAdd() {
 
     if (Content === '' || Due === '') {
       alert("Please enter the Content and Due Date at least!");
+    } else if (Date.parse(Due) < Date.now()) { 
+      alert("Due Date could not be earlier than now!");
     } else {
       let tokenId: string = tokenGenerate().toString();
       let data = {Token: tokenId, Finished: false, Priority: Priority, Notification: Notification, Content: Content, Due: Due};
       localStorage.setItem(tokenId, JSON.stringify(data));
+      history.push('/');
     }
     
-    history.push('/');
   }
 
   //为每一个事件获取一个token

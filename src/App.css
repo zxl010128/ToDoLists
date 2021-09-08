@@ -46,7 +46,7 @@
 
 .dropDownIcon {
   font-size: 30px;
-  margin: 15px 5px 15px 15px;
+  margin: 15px 5px 15px 30px;
   padding-top: 2px;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .Feed {
-  margin: 10px auto;
+  margin: 25px auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

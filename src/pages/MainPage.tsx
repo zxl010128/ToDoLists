@@ -28,12 +28,26 @@ export default function MainPage() {
     //将里面不需要的数据清除
     let todoList: any = []
     for(let i = 0; i < arr.length; i++) {
-        
       if (isNaN(parseInt(arr[i].key)) === false) {
         todoList.push(arr[i].val)
       }
 
     }
+
+    // 将list里面的内容按照时间进行排序
+    if (todoList.length > 1) {
+      for (let i = 0; i < todoList.length - 1; i++) {
+        for(let j = 0; j < todoList.length - i - 1; j++) {
+          if (Date.parse(todoList[j].Due) > Date.parse(todoList[j+1].Due)) {
+            let swap = todoList[j+1];
+            todoList[j+1] = todoList[j];
+            todoList[j] = swap
+          }
+        }
+      }
+    };
+
+    console.log(todoList);
 
     setEvents(todoList);
     
@@ -43,7 +57,7 @@ export default function MainPage() {
     
     //FeedCard制作
     const FormList = events.map((event) => {
-      
+
       // 处理Finished Radio同时对存储信息进行更改
       function handleFinished() {
 
@@ -65,29 +79,32 @@ export default function MainPage() {
         setCount(e => e + 1);
       }
   
-      console.log(event.Token)
-
       // 针对事件的不同情况给予其不同的外观
       // 红色：紧急事件
       // 蓝色：已完成事件
+      // 0.5透明：事件已过期
       let style = {}
+      let reminder: string = "Finished";
       if (event.Finished === true) {
-        style = { width: 300, height: 200, border: '1px solid blue'};
+        style = { width: 300, height: 200, border: '2px solid blue'};
+      } else if (Date.parse(event.Due) < Date.now()){
+        style = { width: 300, height: 200, opacity: '0.5'};
+        reminder = "It has been expired";
       } else if (event.Priority === true) {
-        style = { width: 300, height: 200, border: '1px solid red'};
+        style = { width: 300, height: 200, border: '2px solid red'};
       } else {
-        style = { width: 300, height: 200 };
+        style = { width: 300, height: 200, border: '1px solid black' };
       }
 
       return (
         <Card 
+        key={event.Token}
         className="feedCard"
-        id={event.Token} 
         title={event.Due} 
-        extra={<Button type="text" danger onClick={handleDeleteButton}>Delete</Button>} 
+        extra={<Button type="text" danger onClick={handleDeleteButton} className='deleteButton'>Delete</Button>} 
         style={style}>
           <p>{event.Content}</p>
-          <Radio onChange={handleFinished} defaultChecked={event.Finished === true ? true : false}>Finished</Radio>
+          <Radio onChange={handleFinished} defaultChecked={event.Finished === true ? true : false}>{reminder}</Radio>
         </Card>
       )
     })

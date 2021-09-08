@@ -1,12 +1,12 @@
 import React from 'react';
-import MainPage from './pages/MainPage';
-import EventAddPage from './pages/EventAddPage';
 import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from 'react-router-dom';
+import MainPage from './pages/MainPage';
+import EventAddPage from './pages/EventAddPage';
 
 const App = () => (
   <div className="App">

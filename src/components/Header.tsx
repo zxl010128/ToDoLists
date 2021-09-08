@@ -8,13 +8,13 @@ const menu = () => {
 
   return (
     <Menu>
-      <Menu.Item icon={<SaveOutlined />}>
+      <Menu.Item key="SaveButton" icon={<SaveOutlined />}>
         Save
       </Menu.Item>
-      <Menu.Item icon={<AppstoreAddOutlined/>}>
+      <Menu.Item key="NewEventButton" icon={<AppstoreAddOutlined/>}>
         <Link to="/EventAdd">Add New Event</Link>
       </Menu.Item>
-      <Menu.Item icon={<RollbackOutlined/>}>
+      <Menu.Item key="MainPageButton" icon={<RollbackOutlined/>}>
         <Link to="/">Back To MainPage</Link>
       </Menu.Item>
     </Menu>
