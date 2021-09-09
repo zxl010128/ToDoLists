@@ -36,7 +36,7 @@
   justify-content: center;
   width: 95%;
   border: 2px solid;
-  border: 2px solid lightskyblue;
+  border-color: lightskyblue;
   box-shadow: 2px 2px 5px skyblue;
 }
 .feedCard {
