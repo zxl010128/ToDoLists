@@ -58,6 +58,9 @@
   line-height: 30px;
   margin: 50px;
 }
+.InfoSmallBox p {
+  font-size: 27px;
+}
 .clickButton {
   margin: 0 20px;
 }
@@ -73,7 +76,4 @@
     width: 250px;
     height: 60px;
   }
-}
-.InfoSmallBox > p {
-  font-size: 27px;
 }
