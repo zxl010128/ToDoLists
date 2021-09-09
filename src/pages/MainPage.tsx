@@ -87,14 +87,14 @@ export default function MainPage() {
       let style = {}
       let reminder: string = "Finished";
       if (event.Finished === true) {
-        style = { width: 380, height: 200, border: '2px solid blue'};
+        style = { borderColor: "blue" };
       } else if (Date.parse(event.Due) < Date.now()){
         style = { width: 380, height: 200, opacity: '0.5'};
         reminder = "It has been expired";
       } else if (event.Priority === true) {
-        style = { width: 380, height: 200, border: '2px solid red'};
+        style = { borderColor: "red"};
       } else {
-        style = { width: 380, height: 200, border: '1px solid black' };
+        style = { borderColor: "black" };
       }
 
       const handleModifyButton = () => {

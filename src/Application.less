@@ -1,0 +1,89 @@
+
+@LargeTitleFontSize: 30px;
+@MediumTitleFontSize: 25px;
+@boxBorder: 2px solid;
+
+.Title {
+  font-size: @LargeTitleFontSize;
+  margin: 15px;
+  @media (max-width: 700px) {
+    font-size: @MediumTitleFontSize;
+  }
+}
+
+.dropDownIcon {
+  font-size: @LargeTitleFontSize;
+  margin: 15px 5px 15px 30px;
+  padding-top: 2px;
+  @media (max-width: 700px) {
+    font-size: @MediumTitleFontSize;
+    margin: 15px -5px 15px 15px;
+  }
+}
+
+.Time {
+  font-size: @LargeTitleFontSize;
+  margin: 15px 30px 15px 15px;
+  right: 0;
+  position: absolute;
+  @media (max-width: 700px) {
+    font-size: @MediumTitleFontSize;
+  }
+}
+
+.Feed {
+  margin: 25px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 95%;
+  border: @boxBorder;
+  border: 2px solid lightskyblue;
+  box-shadow:2px 2px 5px skyblue;
+}
+
+.feedCard {
+  margin: 25px;
+  width: 380px;
+  height: 200px;
+  border: @boxBorder
+}
+
+.feedCard span:hover {
+  font-weight: 700;
+}
+
+.Empty {
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+}
+
+.InfoSmallBox {
+  line-height: 30px;
+  margin: 50px;
+}
+
+.clickButton {
+  margin: 0 20px;
+}
+
+.EventPage {
+  margin: 0 auto;
+}
+
+.inputContent {
+  width: 400px;
+  height: 100px;
+  
+  @media (max-width: 700px) {
+    width: 250px;
+    height: 60px;
+  } 
+  
+}
+
+.InfoSmallBox > p{
+  font-size: 27px;
+}

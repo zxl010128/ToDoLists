@@ -1,0 +1,79 @@
+.Title {
+  font-size: 30px;
+  margin: 15px;
+}
+@media (max-width: 700px) {
+  .Title {
+    font-size: 25px;
+  }
+}
+.dropDownIcon {
+  font-size: 30px;
+  margin: 15px 5px 15px 30px;
+  padding-top: 2px;
+}
+@media (max-width: 700px) {
+  .dropDownIcon {
+    font-size: 25px;
+    margin: 15px -5px 15px 15px;
+  }
+}
+.Time {
+  font-size: 30px;
+  margin: 15px 30px 15px 15px;
+  right: 0;
+  position: absolute;
+}
+@media (max-width: 700px) {
+  .Time {
+    font-size: 25px;
+  }
+}
+.Feed {
+  margin: 25px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 95%;
+  border: 2px solid;
+  border: 2px solid lightskyblue;
+  box-shadow: 2px 2px 5px skyblue;
+}
+.feedCard {
+  margin: 25px;
+  width: 380px;
+  height: 200px;
+  border: 2px solid;
+}
+.feedCard span:hover {
+  font-weight: 700;
+}
+.Empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.InfoSmallBox {
+  line-height: 30px;
+  margin: 50px;
+}
+.clickButton {
+  margin: 0 20px;
+}
+.EventPage {
+  margin: 0 auto;
+}
+.inputContent {
+  width: 400px;
+  height: 100px;
+}
+@media (max-width: 700px) {
+  .inputContent {
+    width: 250px;
+    height: 60px;
+  }
+}
+.InfoSmallBox > p {
+  font-size: 27px;
+}

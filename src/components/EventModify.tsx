@@ -3,17 +3,17 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-interface Props {
+interface eventProps {
   tokenId: string
 }
 
-export default function EventModify(props: Props) {
+export default function EventModify(props: eventProps) {
 
   const [Priority, setPriority] = useState(false);  //记录此事件的重要程度
   const [Notification, setNotification] = useState(false);  //记录此事件是否需要due前提醒
   const [Content, setContent] = useState(''); //记录此事件的内容
   const [Due, setDue] = useState('')  //记录此事件的结束时间
-  let history = useHistory();
+  const history = useHistory();
   const tokenId = props.tokenId; //props传来的数据
   const eventData = JSON.parse(localStorage.getItem(tokenId)!);
   
@@ -26,7 +26,7 @@ export default function EventModify(props: Props) {
 
 
 
-  function handlePriorityChange() {
+  const handlePriorityChange = () => {
 
     if (Priority === false) {
       setPriority(true);
@@ -36,7 +36,7 @@ export default function EventModify(props: Props) {
 
   }
 
-  function handleNotificationChange() {
+  const handleNotificationChange = () => {
 
     if (Notification === false) {
       setNotification(true);
@@ -50,12 +50,12 @@ export default function EventModify(props: Props) {
     setDue(dateString);
   }
 
-  function handleConfirm() {
+  const handleConfirm = () => {
 
     if (Content === '' || Due === '') {
       alert("Please enter the Content and Due Date at least!");
     } else {
-      let data = {Token: tokenId, Finished: false, Priority: Priority, Notification: Notification, Content: Content, Due: Due};
+      const data = {Token: tokenId, Finished: false, Priority: Priority, Notification: Notification, Content: Content, Due: Due};
       localStorage.setItem(tokenId, JSON.stringify(data));
       history.push('/');
     }

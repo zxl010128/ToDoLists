@@ -24,13 +24,13 @@ const menu = () => {
 
 // Header右侧的当前时间记录
 function currentTime(): string {
-  let currTime = new Date();
-  let currYear: string = currTime.getFullYear().toString();
+  const currTime = new Date();
+  const currYear: string = currTime.getFullYear().toString();
   let currMonth: string = (currTime.getMonth() + 1).toString();
   let currDate: string = currTime.getDate().toString();
   let currHour: string = currTime.getHours().toString();
   let currMin: string = currTime.getMinutes().toString();
-  let currDayName: string = numberToDayName(currTime.getDay());
+  const currDayName: string = numberToDayName(currTime.getDay());
 
   currMonth = addZeroForTime(currMonth);
   currDate = addZeroForTime(currDate);

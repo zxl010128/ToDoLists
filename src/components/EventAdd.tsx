@@ -8,7 +8,7 @@ export default function EventAdd() {
   const [Notification, setNotification] = useState(false);  //记录此事件是否需要due前提醒
   const [Content, setContent] = useState(''); //记录此事件的内容
   const [Due, setDue] = useState('')  //记录此事件的结束时间
-  let history = useHistory();
+  const history = useHistory();
 
   function handlePriorityChange() {
 
@@ -41,8 +41,8 @@ export default function EventAdd() {
     } else if (Date.parse(Due) < Date.now()) { 
       alert("Due Date could not be earlier than now!");
     } else {
-      let tokenId: string = tokenGenerate().toString();
-      let data = {Token: tokenId, Finished: false, Priority: Priority, Notification: Notification, Content: Content, Due: Due};
+      const tokenId: string = tokenGenerate().toString();
+      const data = {Token: tokenId, Finished: false, Priority: Priority, Notification: Notification, Content: Content, Due: Due};
       localStorage.setItem(tokenId, JSON.stringify(data));
       history.push('/');
     }
