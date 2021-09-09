@@ -1,14 +1,30 @@
 import { DatePicker, Space, Checkbox, Button, Input } from 'antd';
-import { useState } from 'react';
+import moment from 'moment';
+import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-export default function EventAdd() {
+interface Props {
+  tokenId: string
+}
+
+export default function EventModify(props: Props) {
 
   const [Priority, setPriority] = useState(false);  //记录此事件的重要程度
   const [Notification, setNotification] = useState(false);  //记录此事件是否需要due前提醒
   const [Content, setContent] = useState(''); //记录此事件的内容
   const [Due, setDue] = useState('')  //记录此事件的结束时间
   let history = useHistory();
+  const tokenId = props.tokenId; //props传来的数据
+  const eventData = JSON.parse(localStorage.getItem(tokenId)!);
+  
+  useEffect(() => {
+
+    setContent(eventData.Content);
+    setDue(eventData.Due);
+
+  }, [])
+
+
 
   function handlePriorityChange() {
 
@@ -38,20 +54,12 @@ export default function EventAdd() {
 
     if (Content === '' || Due === '') {
       alert("Please enter the Content and Due Date at least!");
-    } else if (Date.parse(Due) < Date.now()) { 
-      alert("Due Date could not be earlier than now!");
     } else {
-      let tokenId: string = tokenGenerate().toString();
       let data = {Token: tokenId, Finished: false, Priority: Priority, Notification: Notification, Content: Content, Due: Due};
       localStorage.setItem(tokenId, JSON.stringify(data));
       history.push('/');
     }
     
-  }
-
-  //为每一个事件获取一个token
-  function tokenGenerate(): number {
-    return Math.floor(Math.random() * 10000) + 1;
   }
 
   return (
@@ -61,6 +69,7 @@ export default function EventAdd() {
         <p>Content</p>
         <Input 
         placeholder="TO-DO" 
+        value={Content}
         className='inputContent' 
         onChange={(event) => setContent(event.target.value)}
         />
@@ -71,6 +80,7 @@ export default function EventAdd() {
           <DatePicker 
           showTime 
           onChange={ handleDateChange }
+          value={moment(Due)}
           />
         </Space>
       </div>

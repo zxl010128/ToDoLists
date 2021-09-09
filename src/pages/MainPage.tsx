@@ -1,11 +1,13 @@
 import { Button, Empty, Card, Radio } from 'antd';
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import Header from '../components/Header';
 
 export default function MainPage() {
 
   const [events, setEvents] = useState<any[]>([]); //记录所有的todo事件
   const [countChange, setCount] = useState(1);  //记录变换次数来进行渲染
+  const history = useHistory();
 
   useEffect(() => {
     
@@ -15,8 +17,8 @@ export default function MainPage() {
     for(let i = 0; i < localStorage.length; i++) {
         
       // ？可能有更好的解决办法
-      let getKey = localStorage.key(i) || "";
-      let getVal = JSON.parse(localStorage.getItem(getKey) || '');
+      let getKey = localStorage.key(i)!;
+      let getVal = JSON.parse(localStorage.getItem(getKey)!);
 
       arr[i] = {
         'key': getKey,
@@ -27,13 +29,12 @@ export default function MainPage() {
     
     //将里面不需要的数据清除
     let todoList: any = []
-    for(let i = 0; i < arr.length; i++) {
-      if (isNaN(parseInt(arr[i].key)) === false) {
-        todoList.push(arr[i].val)
+  
+    arr.forEach((ele) => {
+      if (isNaN(parseInt(ele.key)) === false) {
+        todoList.push(ele.val)
       }
-
-    }
-
+    })
     // 将list里面的内容按照时间进行排序
     if (todoList.length > 1) {
       for (let i = 0; i < todoList.length - 1; i++) {
@@ -53,7 +54,7 @@ export default function MainPage() {
     
   }, [countChange])
 
-  function Cards() {
+  const Cards = () => {
     
     //FeedCard制作
     const FormList = events.map((event) => {
@@ -86,14 +87,18 @@ export default function MainPage() {
       let style = {}
       let reminder: string = "Finished";
       if (event.Finished === true) {
-        style = { width: 300, height: 200, border: '2px solid blue'};
+        style = { width: 380, height: 200, border: '2px solid blue'};
       } else if (Date.parse(event.Due) < Date.now()){
-        style = { width: 300, height: 200, opacity: '0.5'};
+        style = { width: 380, height: 200, opacity: '0.5'};
         reminder = "It has been expired";
       } else if (event.Priority === true) {
-        style = { width: 300, height: 200, border: '2px solid red'};
+        style = { width: 380, height: 200, border: '2px solid red'};
       } else {
-        style = { width: 300, height: 200, border: '1px solid black' };
+        style = { width: 380, height: 200, border: '1px solid black' };
+      }
+
+      const handleModifyButton = () => {
+        history.push(`/EventModify/${event.Token}`);
       }
 
       return (
@@ -101,7 +106,10 @@ export default function MainPage() {
         key={event.Token}
         className="feedCard"
         title={event.Due} 
-        extra={<Button type="text" danger onClick={handleDeleteButton} className='deleteButton'>Delete</Button>} 
+        extra={<div>
+        <Button type="link" onClick={handleModifyButton} className='deleteButton'>Modify</Button>
+        <Button type="text" danger onClick={handleDeleteButton} className='deleteButton'>Delete</Button>
+        </div>} 
         style={style}>
           <p>{event.Content}</p>
           <Radio onChange={handleFinished} defaultChecked={event.Finished === true ? true : false}>{reminder}</Radio>

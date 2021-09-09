@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import EventAddPage from './pages/EventAddPage';
+import EventModifyPage from './pages/EventModifyPage'
 
 const App = () => (
   <div className="App">
@@ -16,6 +17,9 @@ const App = () => (
       </Switch>
       <Switch>
         <Route path='/EventAdd' component={EventAddPage}></Route>
+      </Switch>
+      <Switch>
+        <Route path='/EventModify/:tokenId' component={EventModifyPage}></Route>
       </Switch>
     </Router>
   </div>
