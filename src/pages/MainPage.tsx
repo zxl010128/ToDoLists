@@ -89,7 +89,7 @@ export default function MainPage() {
       if (event.Finished === true) {
         style = { borderColor: "blue" };
       } else if (Date.parse(event.Due) < Date.now()){
-        style = { width: 380, height: 200, opacity: '0.5'};
+        style = { width: 380, height: 200, opacity: '0.4'};
         reminder = "It has been expired";
       } else if (event.Priority === true) {
         style = { borderColor: "red"};
